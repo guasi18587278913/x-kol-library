@@ -175,6 +175,3 @@ export function SearchBar({
     </form>
   )
 }
-
-// 类型导出
-export type { SearchBarProps }

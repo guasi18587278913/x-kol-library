@@ -230,6 +230,3 @@ export function TweetCard({
     </Card>
   )
 }
-
-// 类型导出
-export type { TweetCardProps, TweetMedia }
