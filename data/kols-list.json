@@ -1,0 +1,1495 @@
+[
+  {
+    "username": "dotey",
+    "displayName": "宝玉",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "中文AI圈最权威的信息源之一，Prompt Engineer，LLM精品课程翻译，ChatGPT/Claude/Agent深度解析"
+  },
+  {
+    "username": "Yangyixxxx",
+    "displayName": "Yangyi",
+    "categories": [
+      "AI技术",
+      "商业财富",
+      "设计产品",
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "Reverb Marketing Evangelist，AI信息分享、商业洞察、产品思考、AI视频创作"
+  },
+  {
+    "username": "vista8",
+    "displayName": "向阳乔木",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "前字节员工，Prompt和Vibe Coding实践专家，分享Claude/Agent经验"
+  },
+  {
+    "username": "berryxia",
+    "displayName": "Berry",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "创意大神，提示词专家，AI绘画/Midjourney提示词专家，增长极快"
+  },
+  {
+    "username": "AndrewYNg",
+    "displayName": "Andrew Ng",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "Coursera联合创始人，前百度AI负责人，提出Agentic AI设计模式框架"
+  },
+  {
+    "username": "karpathy",
+    "displayName": "Andrej Karpathy",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "前OpenAI联合创始人、前特斯拉AI负责人，Eureka Labs创立者，LLM领域顶级专家"
+  },
+  {
+    "username": "xiaohuggg",
+    "displayName": "小互",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "微博500万粉过气博主转战Twitter，每天大量AI新闻和工具资讯，ChatGPT使用技巧"
+  },
+  {
+    "username": "imxiaohu",
+    "displayName": "小虎",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "ChatGPT和AI内容创作者，微博528k粉丝，ChatGPT安装和使用教程"
+  },
+  {
+    "username": "sama",
+    "displayName": "Sam Altman",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "OpenAI CEO，ChatGPT发布者"
+  },
+  {
+    "username": "gaborcselle",
+    "displayName": "Gabor Cselle",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "ChatGPT产品负责人"
+  },
+  {
+    "username": "LiamDing_",
+    "displayName": "丁洪 Liam",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "AI产品经理，持续分享Claude使用Prompt和Vibe Coding经验"
+  },
+  {
+    "username": "AmandaAskell",
+    "displayName": "Amanda Askell",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "Anthropic研究员，Claude性格调优负责人"
+  },
+  {
+    "username": "alexalbert__",
+    "displayName": "Alex Albert",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "Anthropic提示工程负责人"
+  },
+  {
+    "username": "xicilion",
+    "displayName": "响马",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "西祠胡同创始人，LLM/RAG/Agent实战经验丰富，向量数据库实践，技术深度强"
+  },
+  {
+    "username": "WaytoAGI",
+    "displayName": "WaytoAGI",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "最好的中文AI知识库，AI资讯整理大师，拓宽视野"
+  },
+  {
+    "username": "rohanpaul_ai",
+    "displayName": "Rohan Paul",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "分享AI Agent最新论文和技术进展"
+  },
+  {
+    "username": "op7418",
+    "displayName": "歸藏/guizang.ai",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "high",
+    "notes": "AIGC周刊主理人，AI绘画/视频/设计，信息密度极高，中文AI博主顶流"
+  },
+  {
+    "username": "ylaboratory",
+    "displayName": "符尧/Yao Fu",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "DeepMind研究员，LLM研究深度分析"
+  },
+  {
+    "username": "jerryjliu0",
+    "displayName": "Jerry Liu",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "LlamaIndex创始人，RAG框架核心开发者"
+  },
+  {
+    "username": "hwchase17",
+    "displayName": "Harrison Chase",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "LangChain创始人，RAG生态重要推动者"
+  },
+  {
+    "username": "_philschmid",
+    "displayName": "Philipp Schmid",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "Hugging Face技术负责人，微调教程和工具分享专家"
+  },
+  {
+    "username": "servasyy_ai",
+    "displayName": "黄佬",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "曾经的创业大佬，AIGC图创作专家，费曼学习法实践者"
+  },
+  {
+    "username": "EMostaque",
+    "displayName": "Emad Mostaque",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "Stability AI前CEO，Stable Diffusion背后推动者"
+  },
+  {
+    "username": "nickfloats",
+    "displayName": "Nick St. Pierre",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "Midjourney创意先锋和AI艺术探索者"
+  },
+  {
+    "username": "hanqing_me",
+    "displayName": "汗青",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "AI Talk创始人，AI短视频制作先行者，探索AI技术与艺术结合"
+  },
+  {
+    "username": "jesselaunz",
+    "displayName": "遁一子",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "关注AI资讯和实际应用，分享AI工具使用心得"
+  },
+  {
+    "username": "skirano",
+    "displayName": "Pietro Schirano",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "AI工具探索者和创作者，分享各种AI实用工具"
+  },
+  {
+    "username": "lewangx",
+    "displayName": "王乐",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "medium",
+    "notes": "独立创业者，探索AI与硬件玩具结合的应用"
+  },
+  {
+    "username": "PandaTalk8",
+    "displayName": "熊老板",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "low",
+    "notes": "AI应用实践分享"
+  },
+  {
+    "username": "imwsl90",
+    "displayName": "卫斯理",
+    "categories": [
+      "AI技术"
+    ],
+    "priority": "low",
+    "notes": "AI应用实践分享"
+  },
+  {
+    "username": "levelsio",
+    "displayName": "Pieter Levels",
+    "categories": [
+      "AI技术",
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "Nomad List/Remote OK/PhotoAI创始人，年收$1M+一人公司标杆，数字游民教父，用AI构建应用的先驱"
+  },
+  {
+    "username": "marclouvier",
+    "displayName": "Marc Lou",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "ShipFast等多个SaaS产品创始人，月收$47K+，极速发布产品，Build in Public代表"
+  },
+  {
+    "username": "arvidkahl",
+    "displayName": "Arvid Kahl",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "The Bootstrapped Founder作者，Build in Public倡导者，成功出售FeedbackPanda"
+  },
+  {
+    "username": "dagorenouf",
+    "displayName": "Dagobert Renouf",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "Logology创始人，Bootstrap创业者，Twitter营销高手"
+  },
+  {
+    "username": "jakobgreenfeld",
+    "displayName": "Jakob Greenfeld",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "连续创业者，分享创业秘诀和内容策略"
+  },
+  {
+    "username": "easychen",
+    "displayName": "Easy",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "方糖气球创始人，独立开发社区知名人物"
+  },
+  {
+    "username": "tinyfool",
+    "displayName": "郝培强",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "20年老程序员，YouTuber，独立开发界元老级人物"
+  },
+  {
+    "username": "ikennylin",
+    "displayName": "Kenny Lin",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "多款独立应用开发者"
+  },
+  {
+    "username": "kiwicopple",
+    "displayName": "Paul Copplestone",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "Supabase CEO，Build in Public典范，分享公司增长数据"
+  },
+  {
+    "username": "panphora",
+    "displayName": "David Miranda",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "SaaS专家，涵盖构建、营销和公开发布"
+  },
+  {
+    "username": "PierreDeWulf",
+    "displayName": "Pierre De Wulf",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "分享SaaS和副业项目经验教训"
+  },
+  {
+    "username": "florinpop1705",
+    "displayName": "Florin Pop",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "$1M in 1000 days挑战者，Build in Public代表"
+  },
+  {
+    "username": "gefei55",
+    "displayName": "哥飞",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "出海鼓励师，SEO专家，出海AI工具方向创业者，出海社区意见领袖"
+  },
+  {
+    "username": "lyc_zh",
+    "displayName": "Yucheng L",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "high",
+    "notes": "出海去创始人，独立开发出海社区发起人，孵化AI时代的超级个体"
+  },
+  {
+    "username": "nateleex",
+    "displayName": "Nateleex",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "AI出海，专注AI产品国际化"
+  },
+  {
+    "username": "tonyzhu1984",
+    "displayName": "Tony Zhu",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "Founder，拥有3+ AI startups，做AI出海项目"
+  },
+  {
+    "username": "dev_afei",
+    "displayName": "阿飞",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "low",
+    "notes": "前端工程师 & 出海探索者"
+  },
+  {
+    "username": "ginhoor",
+    "displayName": "ginhoor",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "low",
+    "notes": "独立App开发者、关注出海业务"
+  },
+  {
+    "username": "cui_xiaorui",
+    "displayName": "崔效瑞",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "一人公司、编程讲师，Earthworm创始人"
+  },
+  {
+    "username": "kasong2048",
+    "displayName": "卡颂",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "自由职业三年，前大厂技术专家，副业咨询"
+  },
+  {
+    "username": "louispereira",
+    "displayName": "Louis Pereira",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "多个独立项目和Newsletter，Half Day Build（12小时从想法到收入）"
+  },
+  {
+    "username": "hzlzh",
+    "displayName": "hzlzh",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "创造者/数字游民/前腾讯微信设计师"
+  },
+  {
+    "username": "seclink",
+    "displayName": "seclink",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "创业（冷启动）、AI、AIGC，专注冷启动策略"
+  },
+  {
+    "username": "imtigerchew",
+    "displayName": "Tiger Chew",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "曾在腾讯、阿里撸码，交过3000万+学费的创业者"
+  },
+  {
+    "username": "javay_hu",
+    "displayName": "Javay Hu",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "Mkdirs + IndieHub创始人，独立开发者社区建设者"
+  },
+  {
+    "username": "rosiesherry",
+    "displayName": "Rosie Sherry",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "前Indie Hackers社区经理，社区建设专家"
+  },
+  {
+    "username": "Insharamin",
+    "displayName": "Insha Ramin",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "medium",
+    "notes": "开发者倡导者，通过内容创作增长到50K粉丝"
+  },
+  {
+    "username": "NotechAna",
+    "displayName": "Ana B",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "low",
+    "notes": "分享创业和营销洞察，强调价值交付"
+  },
+  {
+    "username": "decohack",
+    "displayName": "Decohack",
+    "categories": [
+      "创业出海"
+    ],
+    "priority": "low",
+    "notes": "Indie Hacker / Designer / Photographer"
+  },
+  {
+    "username": "unusual_whales",
+    "displayName": "Unusual Whales",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "320万+粉丝，Stocks/Options/Crypto/Market News，全品类市场新闻，超高互动"
+  },
+  {
+    "username": "jimcramer",
+    "displayName": "Jim Cramer",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "CNBC Mad Money主持人，传统金融媒体顶流"
+  },
+  {
+    "username": "StockMKTNewz",
+    "displayName": "Stock Market News",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "金融新闻速报，覆盖多资产类别，即时行情推送"
+  },
+  {
+    "username": "PeterLBrandt",
+    "displayName": "Peter Brandt",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "1975年起期货交易员，50年交易经验，经典图表分析大师"
+  },
+  {
+    "username": "LizAnnSonders",
+    "displayName": "Liz Ann Sonders",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "Charles Schwab首席投资策略师，数据驱动的宏观评论"
+  },
+  {
+    "username": "PlanB",
+    "displayName": "PlanB",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "190万+粉丝，S2F模型创始人，比特币分析师，长期预测参考标杆"
+  },
+  {
+    "username": "RaoulGMI",
+    "displayName": "Raoul Pal",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "100万+粉丝，Real Vision创始人，宏观经济与加密货币交叉分析"
+  },
+  {
+    "username": "WillyWoo",
+    "displayName": "Willy Woo",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "110万+粉丝，比特币链上数据分析先驱"
+  },
+  {
+    "username": "APompliano",
+    "displayName": "Anthony Pompliano",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "160万+粉丝，Pomp Investments创始人，比特币布道者"
+  },
+  {
+    "username": "BTCdayu",
+    "displayName": "BTCdayu",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "26.8万粉丝，华语加密圈代表，深度市场分析与社区互动"
+  },
+  {
+    "username": "balajis",
+    "displayName": "Balaji Srinivasan",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "100万+粉丝，前Coinbase CTO，a16z前合伙人，Network State理论提出者"
+  },
+  {
+    "username": "cdixon",
+    "displayName": "Chris Dixon",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "85万+粉丝，a16z Crypto GP，Web3项目风向标"
+  },
+  {
+    "username": "VitalikButerin",
+    "displayName": "Vitalik Buterin",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "high",
+    "notes": "550万+粉丝，以太坊联合创始人，Web3精神领袖"
+  },
+  {
+    "username": "kevinrose",
+    "displayName": "Kevin Rose",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "150万粉丝，PROOF Collective/Moonbirds创始人，连接传统科技与Web3"
+  },
+  {
+    "username": "beeple",
+    "displayName": "Beeple",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "73万+粉丝，NFT艺术家，Christie's $6900万拍卖纪录"
+  },
+  {
+    "username": "farokh",
+    "displayName": "Farokh",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "43.8万粉丝，DASTAN总裁，NFT社区领袖"
+  },
+  {
+    "username": "Zeneca_33",
+    "displayName": "Zeneca",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "low",
+    "notes": "37.6万粉丝，收藏家、交易员，Zen Academy创始人，NFT教育"
+  },
+  {
+    "username": "gordongoner",
+    "displayName": "Gordon Goner",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "Yuga Labs联合创始人，BAYC创始人"
+  },
+  {
+    "username": "CamiRusso",
+    "displayName": "Cami Russo",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "The Defiant创始人，《The Infinite Machine》作者，DeFi权威媒体"
+  },
+  {
+    "username": "AndreCronjeTech",
+    "displayName": "Andre Cronje",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "Yearn Finance创始人，DeFi先驱"
+  },
+  {
+    "username": "stani",
+    "displayName": "Stani Kulechov",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "Aave创始人兼CEO，头部DeFi借贷协议创始人"
+  },
+  {
+    "username": "haydenz",
+    "displayName": "Hayden Adams",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "Uniswap创始人，DEX领域开创者，AMM模型推动者"
+  },
+  {
+    "username": "morganhousel",
+    "displayName": "Morgan Housel",
+    "categories": [
+      "投资理财",
+      "商业财富",
+      "内容创作"
+    ],
+    "priority": "high",
+    "notes": "《The Psychology of Money》作者，Collab Fund，投资心理学+财富哲学+简洁有力的写作"
+  },
+  {
+    "username": "ShaanVP",
+    "displayName": "Shaan Puri",
+    "categories": [
+      "投资理财",
+      "商业财富",
+      "内容创作",
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "My First Million播客主持，商业创意拆解，被动收入理念传播者，文案大师，跨多个类目"
+  },
+  {
+    "username": "theankurwarikoo",
+    "displayName": "Ankur Warikoo",
+    "categories": [
+      "投资理财"
+    ],
+    "priority": "medium",
+    "notes": "100万+粉丝，WasWillNow创始人，印度理财教育KOL"
+  },
+  {
+    "username": "naval",
+    "displayName": "Naval Ravikant",
+    "categories": [
+      "商业财富",
+      "内容创作"
+    ],
+    "priority": "high",
+    "notes": "AngelList创始人，硅谷顶级天使投资人，财富与幸福哲学，商业模式底层逻辑，哲学播客"
+  },
+  {
+    "username": "george__mack",
+    "displayName": "George Mack",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "high",
+    "notes": "highagency.com作者，商业模式思维框架、High Agency理论、战略思考"
+  },
+  {
+    "username": "hnshah",
+    "displayName": "Hiten Shah",
+    "categories": [
+      "商业财富",
+      "设计产品",
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "Crazy Egg/KISSmetrics/Nira创始人，20+年SaaS经验，商业模式+定价+转化优化+增长"
+  },
+  {
+    "username": "Patticus",
+    "displayName": "Patrick Campbell",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "ProfitWell创始人（被Paddle收购），SaaS定价第一人"
+  },
+  {
+    "username": "PatFlynn",
+    "displayName": "Pat Flynn",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "Smart Passive Income创始人，被动收入策略、内容变现"
+  },
+  {
+    "username": "noahkagan",
+    "displayName": "Noah Kagan",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "high",
+    "notes": "AppSumo创始人，Facebook第30号员工，创业变现实操、低成本验证"
+  },
+  {
+    "username": "andrewchen",
+    "displayName": "Andrew Chen",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "high",
+    "notes": "a16z合伙人，增长与变现策略、网络效应、平台经济"
+  },
+  {
+    "username": "ericries",
+    "displayName": "Eric Ries",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "《精益创业》作者，精益方法论、MVP验证、产品迭代思维"
+  },
+  {
+    "username": "reidhoffman",
+    "displayName": "Reid Hoffman",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "high",
+    "notes": "LinkedIn联合创始人，Masters of Scale播客主持，闪电式扩张理论"
+  },
+  {
+    "username": "tobi",
+    "displayName": "Tobias Lutke",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "high",
+    "notes": "Shopify CEO，电商平台战略、创业者思维、技术驱动商业"
+  },
+  {
+    "username": "mrsharma",
+    "displayName": "Nik Sharma",
+    "categories": [
+      "商业财富",
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "The DTC Guy，DTC newsletter 10万+读者，电商增长+广告投放+转化优化"
+  },
+  {
+    "username": "daviefogarty",
+    "displayName": "Davie Fogarty",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "多品牌创始人，消费品牌打造、电商实操"
+  },
+  {
+    "username": "youderian",
+    "displayName": "Andrew Youderian",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "low",
+    "notes": "eCommerceFuel创始人，自营电商供应链"
+  },
+  {
+    "username": "randfish",
+    "displayName": "Rand Fishkin",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "SparkToro/Snackbar Studio联合创始人，营销竞品分析、搜索市场洞察"
+  },
+  {
+    "username": "TaylorHoliday",
+    "displayName": "Taylor Holiday",
+    "categories": [
+      "商业财富"
+    ],
+    "priority": "medium",
+    "notes": "Common Thread Collective创始人，电商数据指标、盈利分析"
+  },
+  {
+    "username": "lukew",
+    "displayName": "Luke Wroblewski",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Sutter Hill Ventures MD，前Google产品总监，Mobile First/Web Form Design作者，UI设计教父"
+  },
+  {
+    "username": "mizko",
+    "displayName": "Mizko",
+    "categories": [
+      "设计产品",
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "The Designership创始人，YouTube知名设计频道，Choppity/Nidos创始人，设计教育"
+  },
+  {
+    "username": "Hartdrawss",
+    "displayName": "Hart",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "UI/UX设计师，擅长快速设计App界面"
+  },
+  {
+    "username": "AdhamDannaway",
+    "displayName": "Adham Dannaway",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "独立UI/UX设计师，作品风格独特"
+  },
+  {
+    "username": "mikekus",
+    "displayName": "Mike Kus",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "英国Web/UI设计师，视觉风格鲜明"
+  },
+  {
+    "username": "joulee",
+    "displayName": "Julie Zhuo",
+    "categories": [
+      "设计产品",
+      "内容创作"
+    ],
+    "priority": "high",
+    "notes": "Sundial联合创始人，前Facebook设计VP，《The Making of a Manager》作者，系统思维"
+  },
+  {
+    "username": "jnd1er",
+    "displayName": "Don Norman",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Nielsen Norman Group联合创始人，《设计心理学》作者，UX领域奠基人"
+  },
+  {
+    "username": "andybudd",
+    "displayName": "Andy Budd",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Clearleft联合创始人，Seedcamp风投合伙人，设计/产品顾问"
+  },
+  {
+    "username": "lauraklein",
+    "displayName": "Laura Klein",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "Indeed.com UX经理，Users Know创始人，精益UX实践者"
+  },
+  {
+    "username": "boagworld",
+    "displayName": "Paul Boag",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "独立UX战略设计师，资深UX布道者"
+  },
+  {
+    "username": "jjg",
+    "displayName": "Jesse James Garrett",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Adaptive Path联合创始人，《用户体验要素》作者，交互设计先驱"
+  },
+  {
+    "username": "MrAlanCooper",
+    "displayName": "Alan Cooper",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Cooper Design联合创始人，《About Face》作者，Visual Basic之父，交互设计方法论奠基人"
+  },
+  {
+    "username": "goldenkrishna",
+    "displayName": "Golden Krishna",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Google设计战略师，《The Best Interface is No Interface》作者"
+  },
+  {
+    "username": "scottjenson",
+    "displayName": "Scott Jenson",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "Google Chrome Physical Web项目负责人，前Apple用户界面设计师"
+  },
+  {
+    "username": "khoi",
+    "displayName": "Khoi Vinh",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Adobe首席设计师，Subtraction博客，Wireframe播客主持人"
+  },
+  {
+    "username": "TrentWalton",
+    "displayName": "Trent Walton",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "Paravel Inc联合创始人，响应式设计与视觉设计专家"
+  },
+  {
+    "username": "beep",
+    "displayName": "Ethan Marcotte",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "独立Web设计师，响应式设计(Responsive Web Design)概念创始人"
+  },
+  {
+    "username": "scottbelsky",
+    "displayName": "Scott Belsky",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Behance创始人，A24合伙人，前Adobe CPO，创意产业洞察"
+  },
+  {
+    "username": "debikielman",
+    "displayName": "Debbie Millman",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Sterling Brands CMO，Design Matters播客主持人（全球最长寿设计播客）"
+  },
+  {
+    "username": "davidairey",
+    "displayName": "David Airey",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "爱尔兰品牌标识设计师，54K+粉丝"
+  },
+  {
+    "username": "aarron",
+    "displayName": "Aarron Walter",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前InVision设计教育VP，《Designing for Emotion》作者"
+  },
+  {
+    "username": "brad_frost",
+    "displayName": "Brad Frost",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Atomic Design方法论创始人，设计系统顾问"
+  },
+  {
+    "username": "jina",
+    "displayName": "Jina Anne",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Salesforce Lightning Design System创建者，设计系统社区先驱"
+  },
+  {
+    "username": "nathanacurtis",
+    "displayName": "Nathan Curtis",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "EightShapes创始人，设计系统咨询专家"
+  },
+  {
+    "username": "danmall",
+    "displayName": "Dan Mall",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "SuperFriendly创始人，《Design That Scales》作者"
+  },
+  {
+    "username": "rjs",
+    "displayName": "Ryan Singer",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前Basecamp产品策略负责人，Shape Up方法论创始人"
+  },
+  {
+    "username": "dburka",
+    "displayName": "Daniel Burka",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前GV (Google Ventures)设计合伙人，Design Sprint方法论参与创造者"
+  },
+  {
+    "username": "rogie",
+    "displayName": "Rogie King",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "Figma设计倡导者，擅长原型与组件设计"
+  },
+  {
+    "username": "ransegall",
+    "displayName": "Ran Segall",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Flux Academy创始人，YouTube知名UX/UI设计教育者"
+  },
+  {
+    "username": "jmspool",
+    "displayName": "Jared Spool",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "UIE创始人，用户研究与可用性测试领域泰斗"
+  },
+  {
+    "username": "RobertCialdini",
+    "displayName": "Robert Cialdini",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "《影响力》作者，行为心理学与用户研究方法论奠基人"
+  },
+  {
+    "username": "karenmcgrane",
+    "displayName": "Karen McGrane",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "low",
+    "notes": "UX与内容战略专家，《Content Strategy for Mobile》作者"
+  },
+  {
+    "username": "lennysan",
+    "displayName": "Lenny Rachitsky",
+    "categories": [
+      "设计产品",
+      "内容创作"
+    ],
+    "priority": "high",
+    "notes": "前Airbnb增长PM，Lenny's Newsletter/Podcast主理人，产品管理领域最具影响力Newsletter"
+  },
+  {
+    "username": "ShreyasDoshi",
+    "displayName": "Shreyas Doshi",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "Stripe PM，前Twitter/Google/Yahoo PM，探讨产品管理中人性面"
+  },
+  {
+    "username": "joshelman",
+    "displayName": "Josh Elman",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前LinkedIn/Twitter/Robinhood产品经理，产品洞察丰富"
+  },
+  {
+    "username": "lissijean",
+    "displayName": "Melissa Perri",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "ProduxLabs CEO，哈佛商学院教授，《Escape the Build Trap》作者"
+  },
+  {
+    "username": "johncutlefish",
+    "displayName": "John Cutler",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前Amplitude产品研究与教育负责人，定性+定量数据解决产品问题"
+  },
+  {
+    "username": "jasonfried",
+    "displayName": "Jason Fried",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "37signals (Basecamp/HEY) 创始人兼CEO，少做做精的产品需求哲学，远程工作先驱"
+  },
+  {
+    "username": "aunder",
+    "displayName": "April Underwood",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "medium",
+    "notes": "前Slack CPO，Nearby创始人，产品需求分析与技术创业专家"
+  },
+  {
+    "username": "rrhoover",
+    "displayName": "Ryan Hoover",
+    "categories": [
+      "设计产品"
+    ],
+    "priority": "high",
+    "notes": "Product Hunt创始人，产品发现与需求验证领域标杆人物"
+  },
+  {
+    "username": "waitbutwhy",
+    "displayName": "Tim Urban",
+    "categories": [
+      "内容创作"
+    ],
+    "priority": "high",
+    "notes": "700K+粉丝，Wait But Why创始人，长文写作标杆，视觉化讲解复杂话题"
+  },
+  {
+    "username": "danshipper",
+    "displayName": "Dan Shipper",
+    "categories": [
+      "内容创作",
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "Every CEO，AI+写作，Newsletter商业模式典范，从$1M到$2M ARR仅7个月"
+  },
+  {
+    "username": "fabianstelzer",
+    "displayName": "Fabian Stelzer",
+    "categories": [
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "AI创意内容先锋，用AI工具(Glif)快速生成创意内容"
+  },
+  {
+    "username": "lindayaX",
+    "displayName": "Linda Yaccarino",
+    "categories": [
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "X/Twitter CEO，创作者经济、平台内容生态"
+  },
+  {
+    "username": "patrickc",
+    "displayName": "Patrick Collison",
+    "categories": [
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "Stripe CEO，创作者经济趋势"
+  },
+  {
+    "username": "brian_armstrong",
+    "displayName": "Brian Armstrong",
+    "categories": [
+      "内容创作"
+    ],
+    "priority": "medium",
+    "notes": "Coinbase CEO，Base创作者经济、线下活动直播"
+  },
+  {
+    "username": "CoderJeffLee",
+    "displayName": "子木聊AI出海",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "AI增长黑客，前全干码农，专注AI和出海增长，SEO经验分享"
+  },
+  {
+    "username": "zhugezifang",
+    "displayName": "zhugezifang",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "前大厂程序员，业余独立开发者，深耕SEO实战"
+  },
+  {
+    "username": "seoer_org",
+    "displayName": "搜优家seoer.org",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "专注SEO/谷歌排名/网站优化/外链"
+  },
+  {
+    "username": "HiQuan4",
+    "displayName": "Quan",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "带娃出海上站，从月入千刀到月入万刀，SEO实战派"
+  },
+  {
+    "username": "wumeilv_ai",
+    "displayName": "吴美律AI日记",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "AI编程入门与提效、出海实战与案例分享"
+  },
+  {
+    "username": "chuhaiqu",
+    "displayName": "出海去孵化器",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "帮助一人企业做好出海增长的社区孵化器，SEO+广告+红人三板斧"
+  },
+  {
+    "username": "rotor187",
+    "displayName": "炮爷Hack",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "前程序员，创业5年，All in AI搞钱，付费用户1.5w+，出海赚钱全流程"
+  },
+  {
+    "username": "0xPlato",
+    "displayName": "Plato / GetPaid Studio",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "前腾讯全球化，Reddit从0到1起号指南，免费SEO流量获取"
+  },
+  {
+    "username": "FLMdongtianfudi",
+    "displayName": "Fang知识分享",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "十年自媒体从业者，Telegram频道运营和流量获取"
+  },
+  {
+    "username": "dharmesh",
+    "displayName": "Dharmesh Shah",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "HubSpot联合创始人/CTO，simple.ai周报200万+订阅，inbound marketing开创者"
+  },
+  {
+    "username": "alexgarcia_atx",
+    "displayName": "Alex Garcia",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "Building最佳内容工作室，Sweat Equity Pod，品牌内容创作和营销文案"
+  },
+  {
+    "username": "SahilBloom",
+    "displayName": "Sahil Bloom",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "high",
+    "notes": "NYT畅销书《The 5 Types of Wealth》作者，Wild Roman创始人，框架性内容和个人品牌"
+  },
+  {
+    "username": "vccbus",
+    "displayName": "vccbus",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "FB广告月花22万美刀的实战派，强调付费投流"
+  },
+  {
+    "username": "MrDeGao",
+    "displayName": "DeGao",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "Qafind CEO，ChatDLM创始人，广告投放ROI计算"
+  },
+  {
+    "username": "tuturetom",
+    "displayName": "Tom Huang",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "Building open-source agentic workspace，前TikTok，社交媒体涨粉工具栈"
+  },
+  {
+    "username": "bearliu",
+    "displayName": "Bear Liu",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "Product Designer，10年+播客人，2本书作者，社交媒体运营干货"
+  },
+  {
+    "username": "stark_nico99",
+    "displayName": "Nicolechan",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "User Growth Leader，前腾讯校友内容负责人，Community & Content Expert"
+  },
+  {
+    "username": "cheerselflin",
+    "displayName": "林悦己Cheer",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "AI influencer，@evolinkai CMO，广告到SEO到AI自动内容的完整流量打法"
+  },
+  {
+    "username": "0xajc",
+    "displayName": "陈锦初Andrew",
+    "categories": [
+      "营销增长"
+    ],
+    "priority": "medium",
+    "notes": "创业出海，SEO和广告"
+  }
+]
