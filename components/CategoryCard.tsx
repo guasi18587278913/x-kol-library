@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { CategoryVariant } from "@/lib/category-utils"
 
 export interface CategoryCardProps {
   id: string
@@ -12,7 +13,7 @@ export interface CategoryCardProps {
   icon: string
   kolCount: number
   slug: string
-  variant?: "ai" | "startup" | "invest" | "business" | "design" | "content" | "marketing"
+  variant?: CategoryVariant
   className?: string
 }
 
@@ -56,37 +57,4 @@ export function CategoryCard({
       </Card>
     </Link>
   )
-}
-
-// 类目颜色映射
-export const categoryVariants: Record<string, CategoryCardProps["variant"]> = {
-  "ai-tech": "ai",
-  "startup": "startup",
-  "invest": "invest",
-  "business": "business",
-  "design": "design",
-  "content": "content",
-  "marketing": "marketing",
-}
-
-// 类目图标映射
-export const categoryIcons: Record<string, string> = {
-  "ai-tech": "🤖",
-  "startup": "🚀",
-  "invest": "💰",
-  "business": "💼",
-  "design": "🎨",
-  "content": "✍️",
-  "marketing": "📈",
-}
-
-// 类目名称映射
-export const categoryNames: Record<string, string> = {
-  "ai-tech": "AI 技术",
-  "startup": "创业出海",
-  "invest": "投资理财",
-  "business": "商业财富",
-  "design": "设计产品",
-  "content": "内容创作",
-  "marketing": "营销增长",
 }

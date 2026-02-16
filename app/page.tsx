@@ -1,6 +1,7 @@
 import { getAllCategories } from "@/lib/queries"
-import { CategoryCard, categoryVariants } from "@/components/CategoryCard"
+import { CategoryCard } from "@/components/CategoryCard"
 import { SearchBar } from "@/components/SearchBar"
+import { categoryVariants } from "@/lib/category-utils"
 
 export default async function HomePage() {
   const categories = await getAllCategories()

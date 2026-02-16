@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { SearchBar } from "@/components/SearchBar"
 import { KOLCard } from "@/components/KOLCard"
 import { TweetCard } from "@/components/TweetCard"
-import { categoryVariants, categoryNames } from "@/components/CategoryCard"
+import { categoryVariants, categoryNames } from "@/lib/category-utils"
 import type { KOL, Tweet } from "@/lib/types"
 
 type SearchType = "all" | "kols" | "tweets"

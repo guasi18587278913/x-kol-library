@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { getKOLByUsername, getTweetsByKOL, getTweetCount } from "@/lib/queries"
-import { categoryVariants, categoryNames } from "@/components/CategoryCard"
+import { categoryVariants, categoryNames } from "@/lib/category-utils"
 import { TweetTimeline } from "./TweetTimeline"
 import { Users, ExternalLink } from "lucide-react"
 
