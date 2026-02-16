@@ -119,6 +119,3 @@ export function KOLCard({
     </Link>
   )
 }
-
-// 类型导出
-export type { KOLCardProps }
