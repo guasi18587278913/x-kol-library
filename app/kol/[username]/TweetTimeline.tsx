@@ -60,6 +60,7 @@ export function TweetTimeline({
             contentZh={tweet.content_zh}
             createdAt={tweet.tweet_time}
             tweetUrl={tweet.tweet_url}
+            mediaUrls={tweet.media_urls}
             stats={{
               likes: tweet.likes,
               retweets: tweet.retweets,
