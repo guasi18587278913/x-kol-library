@@ -60,7 +60,7 @@ export function KOLCard({
         {/* Header: Avatar + Name */}
         <div className="flex items-center gap-3">
           <Avatar className="h-12 w-12 ring-1 ring-border group-hover:ring-primary/30 transition-all">
-            <AvatarImage src={avatar} alt={name} />
+            {avatar ? <AvatarImage src={avatar} alt={name} /> : null}
             <AvatarFallback className="text-sm font-medium bg-primary/5 text-primary">
               {getInitials(name)}
             </AvatarFallback>

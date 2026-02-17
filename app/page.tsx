@@ -1,24 +1,31 @@
 import Link from "next/link"
-import { getAllCategories, getFeaturedTweets, getLatestTweets, getTotalKOLCount, getTotalTweetCount, getKOLMap } from "@/lib/queries"
-import { CategoryCard } from "@/components/CategoryCard"
-import { TweetCard } from "@/components/TweetCard"
-import { LatestTweets } from "@/components/LatestTweets"
-import { categoryVariants } from "@/lib/category-utils"
-import { Users, FileText, Layers } from "lucide-react"
+import Image from "next/image"
+import { getAllCategories, getKOLsByCategory, getTotalKOLCount, getTotalTweetCount } from "@/lib/queries"
+import { Users, FileText, Layers, ChevronRight } from "lucide-react"
+
+function formatFollowers(count: number): string {
+  if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`
+  if (count >= 1000) return `${(count / 1000).toFixed(1)}K`
+  return count.toString()
+}
+
+function getInitials(name: string): string {
+  const chars = name.trim().split(/\s+/)
+  if (chars.length >= 2) return `${chars[0][0]}${chars[1][0]}`.toUpperCase()
+  return name.slice(0, 2).toUpperCase()
+}
 
 export default async function HomePage() {
-  const [categories, featuredTweets, latestTweets, kolCount, tweetCount] = await Promise.all([
+  const [categories, kolCount, tweetCount] = await Promise.all([
     getAllCategories(),
-    getFeaturedTweets(6),
-    getLatestTweets(20, 0),
     getTotalKOLCount(),
     getTotalTweetCount(),
   ])
 
-  // Get KOL info for all tweets
-  const allTweets = [...featuredTweets, ...latestTweets]
-  const uniqueUsernames = [...new Set(allTweets.map((t) => t.kol_username))]
-  const kolMap = await getKOLMap(uniqueUsernames)
+  // Fetch KOLs for each category in parallel
+  const categoryKOLs = await Promise.all(
+    categories.map((cat) => getKOLsByCategory(cat.slug, 10, 0))
+  )
 
   return (
     <main>
@@ -66,74 +73,83 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-6 lg:px-8 py-12 space-y-16">
-        {/* Featured Tweets */}
-        {featuredTweets.length > 0 && (
-          <section>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-1 h-6 rounded-full bg-accent" />
-              <h2 className="text-xl font-bold">精选推文</h2>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {featuredTweets.map((tweet) => {
-                const kol = kolMap[tweet.kol_username]
-                return (
-                  <TweetCard
-                    key={tweet.id}
-                    id={tweet.id}
-                    content={tweet.content}
-                    contentZh={tweet.content_zh}
-                    createdAt={tweet.tweet_time}
-                    tweetUrl={tweet.tweet_url}
-                    featured
-                    stats={{
-                      likes: tweet.likes,
-                      retweets: tweet.retweets,
-                      replies: tweet.replies,
-                    }}
-                    author={{
-                      name: kol?.display_name || tweet.kol_username,
-                      username: tweet.kol_username,
-                      avatar: kol?.avatar_url || "",
-                    }}
-                  />
-                )
-              })}
-            </div>
-          </section>
-        )}
+      {/* Category KOL Showcase */}
+      <div className="container mx-auto px-6 lg:px-8 py-12 space-y-12">
+        {categories.map((category, catIdx) => {
+          const kols = categoryKOLs[catIdx]
+          if (!kols || kols.length === 0) return null
 
-        {/* Browse Categories */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-1 h-6 rounded-full bg-primary" />
-              <h2 className="text-xl font-bold">浏览类目</h2>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-            {categories.map((category) => (
-              <CategoryCard
-                key={category.id}
-                id={category.id}
-                name={category.name}
-                icon={category.icon}
-                kolCount={category.kol_count}
-                slug={category.slug}
-                variant={categoryVariants[category.slug]}
-              />
-            ))}
-          </div>
-        </section>
+          return (
+            <section key={category.id}>
+              {/* Category header */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl" aria-hidden="true">{category.icon}</span>
+                  <h2 className="text-lg font-bold text-foreground">{category.name}</h2>
+                  <span className="text-xs text-muted-foreground ml-1">
+                    {category.kol_count} 位 KOL
+                  </span>
+                </div>
+                <Link
+                  href={`/category/${category.slug}`}
+                  className="text-sm text-primary hover:text-primary/80 transition-colors flex items-center gap-0.5"
+                >
+                  查看全部
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
 
-        {/* Latest Tweets Timeline */}
-        <section>
-          <div className="flex items-center gap-2 mb-6">
-            <div className="w-1 h-6 rounded-full bg-primary" />
-            <h2 className="text-xl font-bold">最新推文</h2>
-          </div>
-          <LatestTweets initialTweets={latestTweets} kolMap={kolMap} />
-        </section>
+              {/* KOL cards horizontal scroll */}
+              <div className="flex overflow-x-auto gap-4 pb-2 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+                {kols.map((kol) => (
+                  <Link
+                    key={kol.id}
+                    href={`/kol/${kol.username}`}
+                    className="shrink-0 block group"
+                  >
+                    <div className="bg-card rounded-xl border border-border p-4 w-[200px] transition-all duration-200 hover:shadow-card hover:border-primary/15 hover:-translate-y-0.5">
+                      {/* Avatar */}
+                      <div className="flex justify-center mb-3">
+                        {kol.avatar_url ? (
+                          <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden ring-1 ring-border group-hover:ring-primary/30 transition-all">
+                            <Image
+                              src={kol.avatar_url}
+                              alt={kol.display_name}
+                              width={60}
+                              height={60}
+                              className="object-cover rounded-full"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-[60px] h-[60px] rounded-full bg-primary/10 flex items-center justify-center ring-1 ring-border text-primary font-semibold text-lg">
+                            {getInitials(kol.display_name)}
+                          </div>
+                        )}
+                      </div>
+                      {/* Name */}
+                      <h3 className="font-semibold text-sm text-center truncate group-hover:text-primary transition-colors">
+                        {kol.display_name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground text-center truncate mt-0.5">
+                        @{kol.username}
+                      </p>
+                      {/* Followers */}
+                      <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mt-2">
+                        <Users className="h-3 w-3" />
+                        <span className="font-medium text-foreground">{formatFollowers(kol.followers)}</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Divider between categories (except last) */}
+              {catIdx < categories.length - 1 && (
+                <div className="border-b border-border/60 mt-8" />
+              )}
+            </section>
+          )
+        })}
       </div>
     </main>
   )

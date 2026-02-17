@@ -111,6 +111,9 @@ interface McpPost {
   content: string;
   likes: number;
   retweets: number;
+  imageUrls?: string[];
+  tweetUrl?: string;
+  id?: string;
 }
 
 // ============================================
@@ -123,7 +126,8 @@ interface McpPost {
  */
 export function processMcpProfile(
   mcpData: McpProfileResponse,
-  entry: KolListEntry
+  entry: KolListEntry,
+  avatarUrl?: string
 ): { kol: CleanedKol; tweets: CleanedTweet[] } {
   const followers =
     mcpData.followers > 0
@@ -135,7 +139,7 @@ export function processMcpProfile(
     username: entry.username,
     display_name: mcpData.displayName || entry.displayName,
     bio: mcpData.bio || entry.notes,
-    avatar_url: "", // MCP tool doesn't return avatar URLs
+    avatar_url: avatarUrl || "",
     followers,
     following: mcpData.following || 0,
     tweet_total: mcpData.posts || 0,
@@ -158,13 +162,13 @@ export function processMcpProfile(
         content_zh: "",
         language,
         translated_at: null,
-        media_urls: [],
+        media_urls: post.imageUrls || [],
         likes: safeParseInt(post.likes),
         retweets: safeParseInt(post.retweets),
         replies: 0,
         views: 0,
         tweet_time: new Date().toISOString(),
-        tweet_url: `https://x.com/${entry.username}`,
+        tweet_url: post.tweetUrl || `https://x.com/${entry.username}`,
         is_retweet: post.content.startsWith("RT @"),
         is_reply: false,
       });

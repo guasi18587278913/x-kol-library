@@ -141,6 +141,19 @@ export async function getKOLMap(usernames: string[]): Promise<Record<string, { d
 }
 
 // ========================================
+// KOLs for Category (simple)
+// ========================================
+
+export async function getKOLsForCategory(slug: string): Promise<KOL[]> {
+  return query<KOL>(
+    `SELECT * FROM kols
+     WHERE categories @> $1::jsonb
+     ORDER BY followers DESC`,
+    [JSON.stringify([slug])]
+  );
+}
+
+// ========================================
 // Search
 // ========================================
 
