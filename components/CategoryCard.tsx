@@ -1,9 +1,6 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { CategoryVariant } from "@/lib/category-utils"
 
@@ -27,34 +24,24 @@ export function CategoryCard({
   className,
 }: CategoryCardProps) {
   return (
-    <Link href={`/category/${slug}`} className="block">
-      <Card
+    <Link href={`/category/${slug}`} className="block group">
+      <div
         className={cn(
-          "group cursor-pointer card-hover transition-all duration-200",
-          "hover:shadow-card-hover hover:-translate-y-1",
+          "bg-card rounded-xl border border-border p-5 transition-all duration-200",
+          "hover:shadow-card hover:border-primary/15 hover:-translate-y-0.5",
           className
         )}
       >
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
-            <div className="text-4xl" aria-hidden="true">
-              {icon}
-            </div>
-            <Badge variant={variant} className="text-xs">
-              {kolCount} 位
-            </Badge>
-          </div>
-        </CardHeader>
-
-        <CardContent>
-          <CardTitle className="text-xl mb-2 group-hover:text-accent transition-colors">
-            {name}
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            发现 {kolCount} 位优质 KOL
-          </p>
-        </CardContent>
-      </Card>
+        <div className="text-3xl mb-3" aria-hidden="true">
+          {icon}
+        </div>
+        <h3 className="font-semibold text-base group-hover:text-primary transition-colors">
+          {name}
+        </h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          {kolCount} 位 KOL
+        </p>
+      </div>
     </Link>
   )
 }

@@ -51,12 +51,13 @@ export function TweetTimeline({
 
   return (
     <>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {tweets.map((tweet) => (
           <TweetCard
             key={tweet.id}
             id={tweet.id}
             content={tweet.content}
+            contentZh={tweet.content_zh}
             createdAt={tweet.tweet_time}
             tweetUrl={tweet.tweet_url}
             stats={{

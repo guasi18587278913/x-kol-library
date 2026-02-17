@@ -126,7 +126,7 @@ export function SearchBar({
         placeholder={placeholder}
         className={cn(
           "h-12 pl-10 pr-20 text-base",
-          "focus-visible:ring-accent",
+          "focus-visible:ring-primary",
           isFocused && "shadow-md"
         )}
         aria-label="搜索"

@@ -33,6 +33,9 @@ export interface Tweet {
   tweet_id: string;
   kol_username: string;
   content: string;
+  content_zh: string;
+  language: string;
+  translated_at: string | null;
   media_urls: string[];
   likes: number;
   retweets: number;

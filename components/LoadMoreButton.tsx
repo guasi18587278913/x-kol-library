@@ -14,7 +14,7 @@ export function LoadMoreButton({ onClick, loading, className }: LoadMoreButtonPr
       <button
         onClick={onClick}
         disabled={loading}
-        className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-8 py-3 text-sm font-medium hover:bg-secondary hover:border-primary/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center rounded-lg bg-primary/5 border border-primary/20 text-primary px-8 py-2.5 text-sm font-medium hover:bg-primary/10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "加载中..." : "加载更多"}
       </button>

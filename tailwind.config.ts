@@ -56,6 +56,12 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Twitter Blue 主题色
+        twitter: {
+          DEFAULT: "hsl(var(--twitter-blue))",
+          dark: "hsl(var(--twitter-blue-dark))",
+          light: "hsl(var(--twitter-blue-light))",
+        },
         // 类目强调色
         category: {
           ai: "hsl(var(--category-ai))",

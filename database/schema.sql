@@ -51,6 +51,9 @@ CREATE TABLE tweets (
     tweet_id     VARCHAR(30)  NOT NULL UNIQUE,         -- Twitter 推文 ID
     kol_username VARCHAR(50)  NOT NULL,                -- 关联 KOL 用户名
     content      TEXT         NOT NULL DEFAULT '',     -- 推文正文
+    content_zh   TEXT         NOT NULL DEFAULT '',     -- 中文翻译（英文推文才有）
+    language     VARCHAR(10)  NOT NULL DEFAULT 'zh',   -- 原文语言 ('zh' 或 'en')
+    translated_at TIMESTAMPTZ,                         -- 翻译时间
     media_urls   JSONB        NOT NULL DEFAULT '[]',   -- 媒体 URL 数组
     likes        INT          NOT NULL DEFAULT 0,      -- 点赞数
     retweets     INT          NOT NULL DEFAULT 0,      -- 转推数
@@ -91,6 +94,8 @@ CREATE INDEX idx_tweets_kol_time ON tweets(kol_username, tweet_time DESC);
 CREATE INDEX idx_tweets_likes ON tweets(likes DESC);
 -- 全文搜索索引：支持推文内容搜索
 CREATE INDEX idx_tweets_content_trgm ON tweets USING GIN(content gin_trgm_ops);
+CREATE INDEX idx_tweets_content_zh_trgm ON tweets USING GIN(content_zh gin_trgm_ops);
+CREATE INDEX idx_tweets_language ON tweets(language);
 
 -- ========================================
 -- 触发器：自动更新 updated_at

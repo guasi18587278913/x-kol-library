@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Navbar } from "@/components/Navbar"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -45,11 +46,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    // Add your verification codes here after deployment
-    // google: 'your-google-verification-code',
-    // yandex: 'your-yandex-verification-code',
-  },
 }
 
 export default function RootLayout({
@@ -60,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className="min-h-screen bg-background font-sans antialiased">
+        <Navbar />
         {children}
       </body>
     </html>

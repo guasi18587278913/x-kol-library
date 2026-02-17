@@ -77,6 +77,69 @@ export async function getTweetCount(kolUsername: string): Promise<number> {
   return Number(row?.count ?? 0);
 }
 
+export async function getFeaturedTweets(limit = 6): Promise<Tweet[]> {
+  return query<Tweet>(
+    `SELECT * FROM tweets
+     WHERE tweet_time >= NOW() - INTERVAL '7 days'
+       AND is_retweet = FALSE
+     ORDER BY (likes + retweets) DESC
+     LIMIT $1`,
+    [limit]
+  );
+}
+
+export async function getLatestTweets(
+  limit = 20,
+  offset = 0
+): Promise<Tweet[]> {
+  return query<Tweet>(
+    `SELECT * FROM tweets
+     WHERE is_retweet = FALSE
+     ORDER BY tweet_time DESC
+     LIMIT $1 OFFSET $2`,
+    [limit, offset]
+  );
+}
+
+export async function getTotalTweetCount(): Promise<number> {
+  const row = await queryOne<{ count: string }>(
+    "SELECT COUNT(*) as count FROM tweets"
+  );
+  return Number(row?.count ?? 0);
+}
+
+export async function getTotalKOLCount(): Promise<number> {
+  const row = await queryOne<{ count: string }>(
+    "SELECT COUNT(*) as count FROM kols"
+  );
+  return Number(row?.count ?? 0);
+}
+
+export async function getUntranslatedTweets(limit = 100): Promise<Tweet[]> {
+  return query<Tweet>(
+    `SELECT * FROM tweets
+     WHERE language = 'en'
+       AND (content_zh = '' OR content_zh IS NULL)
+     ORDER BY tweet_time DESC
+     LIMIT $1`,
+    [limit]
+  );
+}
+
+export async function getKOLMap(usernames: string[]): Promise<Record<string, { display_name: string; avatar_url: string }>> {
+  if (usernames.length === 0) return {};
+  const placeholders = usernames.map((_, i) => `$${i + 1}`).join(", ");
+  const rows = await query<KOL>(
+    `SELECT username, display_name, avatar_url FROM kols WHERE username IN (${placeholders})`,
+    usernames
+  );
+  const map: Record<string, { display_name: string; avatar_url: string }> = {};
+  for (const row of rows) {
+    map[row.username] = { display_name: row.display_name, avatar_url: row.avatar_url };
+  }
+  return map;
+}
+
 // ========================================
 // Search
 // ========================================
@@ -105,6 +168,7 @@ export async function searchTweets(
   return query<Tweet>(
     `SELECT * FROM tweets
      WHERE content ILIKE $1
+        OR content_zh ILIKE $1
      ORDER BY likes DESC
      LIMIT $2`,
     [pattern, limit]

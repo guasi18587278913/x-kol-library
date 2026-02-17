@@ -37,6 +37,9 @@ interface ScrapedTweet {
   tweet_id: string;
   kol_username: string;
   content: string;
+  content_zh?: string;
+  language?: string;
+  translated_at?: string;
   media_urls: string[];
   likes: number;
   retweets: number;
@@ -253,6 +256,9 @@ async function main() {
       tweet_id: t.tweet_id,
       kol_username: t.kol_username,
       content: t.content?.trim() || "",
+      content_zh: t.content_zh?.trim() || "",
+      language: t.language || "zh",
+      translated_at: t.translated_at || null,
       media_urls: JSON.stringify(t.media_urls || []),
       likes: t.likes || 0,
       retweets: t.retweets || 0,
@@ -352,12 +358,15 @@ async function main() {
     for (const tweet of cleanedTweets) {
       try {
         await client.query(
-          `INSERT INTO tweets (tweet_id, kol_username, content, media_urls, likes,
-                               retweets, replies, views, tweet_time, tweet_url,
-                               is_retweet, is_reply)
-           VALUES ($1, $2, $3, $4::jsonb, $5, $6, $7, $8, $9, $10, $11, $12)
+          `INSERT INTO tweets (tweet_id, kol_username, content, content_zh, language,
+                               translated_at, media_urls, likes, retweets, replies,
+                               views, tweet_time, tweet_url, is_retweet, is_reply)
+           VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8, $9, $10, $11, $12, $13, $14, $15)
            ON CONFLICT (tweet_id) DO UPDATE SET
              content = EXCLUDED.content,
+             content_zh = EXCLUDED.content_zh,
+             language = EXCLUDED.language,
+             translated_at = EXCLUDED.translated_at,
              likes = EXCLUDED.likes,
              retweets = EXCLUDED.retweets,
              replies = EXCLUDED.replies,
@@ -366,6 +375,9 @@ async function main() {
             tweet.tweet_id,
             tweet.kol_username,
             tweet.content,
+            tweet.content_zh,
+            tweet.language,
+            tweet.translated_at,
             tweet.media_urls,
             tweet.likes,
             tweet.retweets,

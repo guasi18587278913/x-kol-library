@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { getKOLByUsername, getTweetsByKOL, getTweetCount } from "@/lib/queries"
 import { categoryVariants, categoryNames } from "@/lib/category-utils"
 import { TweetTimeline } from "./TweetTimeline"
-import { Users, ExternalLink } from "lucide-react"
+import { Users, ExternalLink, ChevronRight, FileText } from "lucide-react"
 
 const PAGE_SIZE = 20
 
@@ -64,90 +64,97 @@ export default async function KOLPage({ params }: KOLPageProps) {
   const categorySlugs = (kol.categories as string[]) || []
 
   return (
-    <main className="container mx-auto py-12 space-y-10">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-muted-foreground" aria-label="面包屑导航">
-        <Link href="/" className="hover:text-foreground transition-colors">
-          首页
-        </Link>
-        {categorySlugs[0] && (
-          <>
-            <span className="mx-2">/</span>
-            <Link
-              href={`/category/${categorySlugs[0]}`}
-              className="hover:text-foreground transition-colors"
-            >
-              {categoryNames[categorySlugs[0]] || categorySlugs[0]}
-            </Link>
-          </>
-        )}
-        <span className="mx-2">/</span>
-        <span className="text-foreground">{kol.display_name}</span>
-      </nav>
-
+    <main>
       {/* KOL Profile Header */}
-      <section className="flex items-start gap-6 animate-fade-in">
-        <Avatar className="h-20 w-20 ring-2 ring-border">
-          <AvatarImage src={kol.avatar_url} alt={kol.display_name} />
-          <AvatarFallback className="text-xl font-medium bg-muted">
-            {getInitials(kol.display_name)}
-          </AvatarFallback>
-        </Avatar>
-
-        <div className="flex-1 space-y-3">
-          <div>
-            <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-bold">{kol.display_name}</h1>
-              {kol.profile_url && (
-                <a
-                  href={kol.profile_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent transition-colors"
-                  aria-label="在 Twitter 上查看"
+      <section className="border-b border-border bg-card">
+        <div className="container mx-auto px-6 lg:px-8 py-10">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6" aria-label="面包屑导航">
+            <Link href="/" className="hover:text-primary transition-colors">
+              首页
+            </Link>
+            {categorySlugs[0] && (
+              <>
+                <ChevronRight className="h-3.5 w-3.5" />
+                <Link
+                  href={`/category/${categorySlugs[0]}`}
+                  className="hover:text-primary transition-colors"
                 >
-                  <ExternalLink className="h-5 w-5" />
-                </a>
+                  {categoryNames[categorySlugs[0]] || categorySlugs[0]}
+                </Link>
+              </>
+            )}
+            <ChevronRight className="h-3.5 w-3.5" />
+            <span className="text-foreground font-medium truncate">{kol.display_name}</span>
+          </nav>
+
+          {/* Profile */}
+          <div className="flex items-start gap-5">
+            <Avatar className="h-16 w-16 lg:h-20 lg:w-20 ring-2 ring-primary/20">
+              <AvatarImage src={kol.avatar_url} alt={kol.display_name} />
+              <AvatarFallback className="text-lg font-medium bg-primary/5 text-primary">
+                {getInitials(kol.display_name)}
+              </AvatarFallback>
+            </Avatar>
+
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-3">
+                <h1 className="text-2xl lg:text-3xl font-bold truncate">{kol.display_name}</h1>
+                {kol.profile_url && (
+                  <a
+                    href={kol.profile_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="在 Twitter 上查看"
+                  >
+                    <ExternalLink className="h-5 w-5" />
+                  </a>
+                )}
+              </div>
+              <p className="text-muted-foreground mt-0.5">@{kol.username}</p>
+
+              {kol.bio && (
+                <p className="text-sm leading-relaxed mt-3 max-w-3xl">{kol.bio}</p>
+              )}
+
+              {/* Stats */}
+              <div className="flex items-center gap-5 mt-4 text-sm">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Users className="h-4 w-4" />
+                  <span className="font-medium text-foreground">{formatFollowers(kol.followers)}</span>
+                  <span>粉丝</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <FileText className="h-4 w-4" />
+                  <span className="font-medium text-foreground">{total}</span>
+                  <span>条已收录</span>
+                </div>
+              </div>
+
+              {/* Category Tags */}
+              {categorySlugs.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {categorySlugs.map((slug) => (
+                    <Link key={slug} href={`/category/${slug}`}>
+                      <Badge variant={categoryVariants[slug] || "secondary"}>
+                        {categoryNames[slug] || slug}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
-            <p className="text-muted-foreground">@{kol.username}</p>
-          </div>
-
-          {kol.bio && (
-            <p className="text-base leading-relaxed max-w-3xl">{kol.bio}</p>
-          )}
-
-          {/* Stats */}
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <Users className="h-4 w-4" />
-              <span className="font-medium text-foreground">
-                {formatFollowers(kol.followers)}
-              </span>
-              <span>粉丝</span>
-            </div>
-            <div>
-              <span className="font-medium text-foreground">{total}</span>
-              <span className="ml-1">条已收录推文</span>
-            </div>
-          </div>
-
-          {/* Category Tags */}
-          <div className="flex flex-wrap gap-2">
-            {categorySlugs.map((slug) => (
-              <Link key={slug} href={`/category/${slug}`}>
-                <Badge variant={categoryVariants[slug] || "secondary"}>
-                  {categoryNames[slug] || slug}
-                </Badge>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
 
       {/* Tweet Timeline */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-bold">推文时间线</h2>
+      <div className="container mx-auto px-6 lg:px-8 py-10">
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-1 h-6 rounded-full bg-primary" />
+          <h2 className="text-xl font-bold">推文时间线</h2>
+        </div>
         <TweetTimeline
           initialTweets={tweets}
           username={kol.username}
@@ -156,7 +163,7 @@ export default async function KOLPage({ params }: KOLPageProps) {
           total={total}
           limit={PAGE_SIZE}
         />
-      </section>
+      </div>
     </main>
   )
 }

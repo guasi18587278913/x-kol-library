@@ -20,18 +20,16 @@ export const metadata: Metadata = {
 
 function SearchFallback() {
   return (
-    <>
-      <section className="space-y-6">
-        <div className="h-9 w-24 skeleton rounded" />
-        <div className="h-12 w-full max-w-2xl skeleton rounded-lg" />
-      </section>
-    </>
+    <div className="container mx-auto px-6 lg:px-8 py-10 space-y-6">
+      <div className="h-9 w-20 skeleton rounded" />
+      <div className="h-12 w-full max-w-2xl skeleton rounded-lg" />
+    </div>
   )
 }
 
 export default function SearchPage() {
   return (
-    <main className="container mx-auto py-12 space-y-10">
+    <main>
       <Suspense fallback={<SearchFallback />}>
         <SearchContent />
       </Suspense>

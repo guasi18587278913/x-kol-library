@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { getAllCategories, getCategoryBySlug, getKOLsByCategory, getKOLCount } from "@/lib/queries"
 import { KOLList } from "./KOLList"
+import { ChevronRight } from "lucide-react"
 
 const PAGE_SIZE = 12
 
@@ -49,34 +50,36 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   ])
 
   return (
-    <main className="container mx-auto py-12 space-y-10">
-      {/* Breadcrumb */}
-      <nav className="text-sm text-muted-foreground" aria-label="面包屑导航">
-        <Link href="/" className="hover:text-foreground transition-colors">
-          首页
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-foreground">{category.name}</span>
-      </nav>
-
+    <main>
       {/* Category Header */}
-      <section className="space-y-3 animate-fade-in">
-        <div className="flex items-center gap-3">
-          <span className="text-4xl" aria-hidden="true">{category.icon}</span>
-          <h1 className="text-4xl font-bold">{category.name}</h1>
+      <section className="border-b border-border bg-card">
+        <div className="container mx-auto px-6 lg:px-8 py-10">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6" aria-label="面包屑导航">
+            <Link href="/" className="hover:text-primary transition-colors">
+              首页
+            </Link>
+            <ChevronRight className="h-3.5 w-3.5" />
+            <span className="text-foreground font-medium">{category.name}</span>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <span className="text-4xl" aria-hidden="true">{category.icon}</span>
+            <div>
+              <h1 className="text-3xl font-bold">{category.name}</h1>
+              {category.description && (
+                <p className="text-muted-foreground mt-1">{category.description}</p>
+              )}
+              <p className="text-sm text-muted-foreground mt-2">
+                共 <span className="font-medium text-foreground">{total}</span> 位 KOL
+              </p>
+            </div>
+          </div>
         </div>
-        {category.description && (
-          <p className="text-lg text-muted-foreground max-w-3xl">
-            {category.description}
-          </p>
-        )}
-        <p className="text-sm text-muted-foreground">
-          共 {total} 位 KOL
-        </p>
       </section>
 
-      {/* KOL List with Load More */}
-      <section>
+      {/* KOL Grid */}
+      <div className="container mx-auto px-6 lg:px-8 py-10">
         <KOLList
           initialKOLs={kols}
           categorySlug={params.slug}
@@ -84,7 +87,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           total={total}
           limit={PAGE_SIZE}
         />
-      </section>
+      </div>
     </main>
   )
 }

@@ -4,76 +4,51 @@
 
 @layer base {
   :root {
-    /* Light Mode - 雅致灰调 */
-    --background: 0 0% 99%;
-    --foreground: 240 10% 10%;
+    /* Light Mode - 数字图书馆 x 现代杂志 */
+    /* Twitter Blue 主色调 */
+    --background: 210 20% 98%;       /* #FAFAFA 浅灰背景 */
+    --foreground: 207 16% 8%;        /* #0F1419 主文字 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 10%;
+    --card: 0 0% 100%;               /* #FFFFFF 纯白卡片 */
+    --card-foreground: 207 16% 8%;   /* #0F1419 */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 10%;
+    --popover-foreground: 207 16% 8%;
 
-    --primary: 240 6% 15%;
-    --primary-foreground: 0 0% 99%;
+    --primary: 199 89% 53%;          /* #1D9BF0 Twitter Blue */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 6% 15%;
+    --secondary: 200 12% 95%;        /* 浅蓝灰背景 */
+    --secondary-foreground: 207 16% 8%;
 
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 200 12% 95%;
+    --muted-foreground: 201 14% 37%; /* #536471 辅助文字 */
 
-    --accent: 142 76% 36%;
+    --accent: 18 100% 60%;           /* #FF6B35 橙色强调 */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 142 76% 36%;
+    --border: 195 14% 93%;           /* #EFF3F4 边框 */
+    --input: 195 14% 93%;
+    --ring: 199 89% 53%;             /* Twitter Blue */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Twitter Blue 派生色 */
+    --twitter-blue: 199 89% 53%;
+    --twitter-blue-dark: 201 82% 47%;
+    --twitter-blue-light: 199 89% 96%;
 
     /* 类目强调色 */
     --category-ai: 270 60% 60%;
-    --category-startup: 217 91% 60%;
+    --category-startup: 199 89% 53%;
     --category-invest: 45 93% 47%;
     --category-business: 210 100% 40%;
     --category-design: 330 81% 60%;
     --category-content: 25 95% 53%;
     --category-marketing: 142 76% 36%;
-  }
-
-  .dark {
-    /* Dark Mode - 深色模式 */
-    --background: 240 10% 4%;
-    --foreground: 0 0% 95%;
-
-    --card: 240 6% 8%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 240 6% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 0% 95%;
-    --primary-foreground: 240 6% 10%;
-
-    --secondary: 240 6% 12%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 240 6% 12%;
-    --muted-foreground: 240 5% 64%;
-
-    --accent: 142 76% 36%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 6% 15%;
-    --input: 240 6% 15%;
-    --ring: 142 76% 36%;
   }
 }
 
@@ -123,12 +98,13 @@
 
   /* 链接样式 */
   a {
-    @apply text-primary underline-offset-4 hover:underline transition-colors;
+    @apply text-foreground underline-offset-4 hover:text-primary transition-colors;
+    text-decoration: none;
   }
 
   /* 选中文本 */
   ::selection {
-    @apply bg-accent/20 text-accent-foreground;
+    @apply bg-primary/20 text-foreground;
   }
 
   /* 滚动条样式（仅 Webkit） */
@@ -188,7 +164,7 @@
 
   /* 卡片悬停效果 */
   .card-hover {
-    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-1 hover:border-primary/30;
+    @apply transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5 hover:border-primary/20;
   }
 
   /* 骨架屏动画 */

@@ -1,0 +1,14 @@
+services:
+  - type: cron
+    name: xkol-cron
+    runtime: node
+    schedule: "0 2 * * *"
+    buildCommand: npm install && npx tsc
+    startCommand: node dist/index.js once
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: DATA_DIR
+        value: ./data

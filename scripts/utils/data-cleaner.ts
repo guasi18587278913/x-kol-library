@@ -43,6 +43,9 @@ export interface CleanedTweet {
   tweet_id: string;
   kol_username: string;
   content: string;
+  content_zh: string;
+  language: string;
+  translated_at: string | null;
   media_urls: string[];
   likes: number;
   retweets: number;
@@ -80,6 +83,25 @@ export function extractTags(notes: string): string[] {
   }
 
   return tags;
+}
+
+/**
+ * Detect if text is primarily Chinese or English.
+ * Returns 'zh' if the text contains a significant proportion of CJK characters,
+ * otherwise returns 'en'.
+ */
+export function detectLanguage(text: string): string {
+  if (!text) return "zh";
+  // Count CJK unified ideographs
+  const cjkChars = text.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g);
+  const cjkCount = cjkChars ? cjkChars.length : 0;
+  // Count ASCII letters
+  const asciiChars = text.match(/[a-zA-Z]/g);
+  const asciiCount = asciiChars ? asciiChars.length : 0;
+  // If CJK chars make up more than 10% of letter content, treat as Chinese
+  if (cjkCount === 0 && asciiCount === 0) return "zh";
+  if (cjkCount / (cjkCount + asciiCount) > 0.1) return "zh";
+  return "en";
 }
 
 /**
@@ -188,10 +210,15 @@ export function cleanTweetData(
     tweetTime = new Date().toISOString();
   }
 
+  const language = detectLanguage(content);
+
   return {
     tweet_id: tweetId,
     kol_username: kolUsername,
     content,
+    content_zh: "",
+    language,
+    translated_at: null,
     media_urls: mediaUrls,
     likes: safeParseInt(raw.likes || raw.likeCount || raw.favoriteCount),
     retweets: safeParseInt(raw.retweets || raw.retweetCount),
