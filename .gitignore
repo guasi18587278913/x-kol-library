@@ -44,9 +44,12 @@ next-env.d.ts
 *.swo
 *~
 
-# Data files (large)
+# Data files (large / sensitive)
 data/*-scraped.json
 data/*-raw.json
+data/tweets-api.json
+data/x-scraped.db
+data/browser-session/
 
 # Temporary files
 *.tmp
