@@ -63,6 +63,7 @@ CREATE TABLE tweets (
     tweet_url    TEXT         NOT NULL DEFAULT '',     -- 推文原始链接
     is_retweet   BOOLEAN      NOT NULL DEFAULT FALSE,  -- 是否为转推
     is_reply     BOOLEAN      NOT NULL DEFAULT FALSE,  -- 是否为回复
+    is_thread    BOOLEAN      NOT NULL DEFAULT FALSE,  -- 是否为连推（Thread），内容为多段拼接
     created_at   TIMESTAMPTZ  NOT NULL DEFAULT NOW(),
 
     CONSTRAINT fk_tweets_kol

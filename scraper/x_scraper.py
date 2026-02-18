@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 X (Twitter) 推文爬虫
-基于 Playwright，模拟浏览器抓取指定 KOL 的推文
+基于 Playwright，模拟浏览器抓取指定 KOL 的推文，支持 Thread 连推展开
 
 使用方式：
   # 第一步：登录（只需要一次）
@@ -51,7 +51,17 @@ KOL_DELAY = 8.0           # KOL 间切换间隔（秒）
 RATE_LIMIT_COOLDOWN = 45  # 连续超时后冷却时间（秒）
 MIN_LIKES = 30            # 最低点赞数（质量门槛）
 MIN_RETWEETS = 10         # 最低转发数（满足其一即可）
-MIN_CHARS = 30            # 最短文字长度
+MIN_CHARS = 80            # 最短文字长度（过滤碎碎念）
+MAX_THREAD_PARTS = 20     # Thread 最多拼接条数
+
+# Thread 开头识别：含 🧵 、"1/5"、"(1)" 等标记
+THREAD_START_RE = re.compile(
+    r"🧵"              # thread emoji
+    r"|(?<!\d)1\s*/\s*\d+"  # "1/5" or "1/ 5"
+    r"|\(1\)\s*$"      # "(1)" at end
+    r"|^\s*\(1\)",     # "(1)" at start
+    re.IGNORECASE,
+)
 
 # ─── 工具函数 ─────────────────────────────────────────────────────────────────
 
@@ -78,7 +88,12 @@ def detect_language(text: str) -> str:
     return "zh" if cjk_count > len(text) * 0.1 else "en"
 
 
-def load_usernames() -> list[str]:
+def is_thread_start(content: str) -> bool:
+    """检测推文是否是 Thread（连推）的开头"""
+    return bool(THREAD_START_RE.search(content))
+
+
+def load_usernames() -> list:
     """从 kol-from-queries.txt 读取用户名列表"""
     if not KOL_FILE.exists():
         print(f"❌ 找不到 KOL 文件：{KOL_FILE}")
@@ -91,7 +106,7 @@ def load_usernames() -> list[str]:
     return usernames
 
 
-def load_progress() -> set[str]:
+def load_progress() -> set:
     """读取已完成的用户名列表"""
     if PROGRESS_FILE.exists():
         data = json.loads(PROGRESS_FILE.read_text())
@@ -99,7 +114,7 @@ def load_progress() -> set[str]:
     return set()
 
 
-def save_progress(done: set[str]):
+def save_progress(done: set):
     """保存进度"""
     PROGRESS_FILE.write_text(json.dumps({"done": list(done)}, ensure_ascii=False, indent=2))
 
@@ -122,12 +137,18 @@ def init_db() -> sqlite3.Connection:
             lang        TEXT    DEFAULT 'en',
             tweet_time  TEXT,
             tweet_url   TEXT,
+            is_thread   INTEGER DEFAULT 0,
             scraped_at  TEXT    DEFAULT (datetime('now')),
             exported    INTEGER DEFAULT 0
         )
     """)
     conn.execute("CREATE INDEX IF NOT EXISTS idx_un ON tweets(username)")
     conn.execute("CREATE INDEX IF NOT EXISTS idx_tid ON tweets(tweet_id)")
+    # 兼容旧数据库：添加 is_thread 列（如果不存在）
+    try:
+        conn.execute("ALTER TABLE tweets ADD COLUMN is_thread INTEGER DEFAULT 0")
+    except Exception:
+        pass
     conn.commit()
     return conn
 
@@ -137,12 +158,13 @@ def db_save_tweet(conn: sqlite3.Connection, t: dict) -> bool:
     try:
         cur = conn.execute(
             """INSERT OR IGNORE INTO tweets
-               (username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+               (username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url, is_thread)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 t["username"], t["tweet_id"], t["content"],
                 t["likes"], t["retweets"], t["replies"],
                 t["lang"], t["tweet_time"], t["tweet_url"],
+                t.get("is_thread", 0),
             ),
         )
         conn.commit()
@@ -150,6 +172,15 @@ def db_save_tweet(conn: sqlite3.Connection, t: dict) -> bool:
     except Exception as e:
         print(f"    ⚠️  DB 写入失败 [{t.get('tweet_id')}]: {e}")
         return False
+
+
+def db_update_thread_content(conn: sqlite3.Connection, tweet_id: str, content: str, lang: str):
+    """用展开后的 Thread 内容更新数据库"""
+    conn.execute(
+        "UPDATE tweets SET content=?, lang=?, is_thread=1 WHERE tweet_id=?",
+        (content, lang, tweet_id),
+    )
+    conn.commit()
 
 
 def db_stats(conn: sqlite3.Connection):
@@ -160,19 +191,67 @@ def db_stats(conn: sqlite3.Connection):
     ).fetchall()
     kols = conn.execute("SELECT COUNT(DISTINCT username) FROM tweets").fetchone()[0]
     unexported = conn.execute("SELECT COUNT(*) FROM tweets WHERE exported=0").fetchone()[0]
+    threads = conn.execute("SELECT COUNT(*) FROM tweets WHERE is_thread=1").fetchone()[0]
 
     print(f"\n📊 数据库统计：")
-    print(f"   总推文数：{total}")
+    print(f"   总推文数：{total}（其中 Thread：{threads}）")
     print(f"   KOL 数：{kols}")
     print(f"   待导出：{unexported}")
     for lang, cnt in by_lang:
         print(f"   语言 [{lang}]：{cnt}")
 
 
+# ─── Thread 抓取 ──────────────────────────────────────────────────────────────
+
+
+async def fetch_thread_content(page: Page, tweet_url: str, username: str) -> Optional[str]:
+    """
+    进入推文详情页，拼接同作者所有连推段落，返回合并后的完整内容。
+    若不是真正的 Thread（只有 1 条），返回 None。
+    """
+    try:
+        await page.goto(tweet_url, wait_until="domcontentloaded", timeout=25_000)
+        await page.wait_for_selector('article[data-testid="tweet"]', timeout=15_000)
+        await page.wait_for_timeout(2_000)
+    except Exception as e:
+        print(f"        ⚠️  Thread 页面加载失败：{e}")
+        return None
+
+    parts = []
+    seen_texts = set()
+
+    articles = await page.query_selector_all('article[data-testid="tweet"]')
+    for article in articles:
+        # 检查作者是否匹配
+        user_el = await article.query_selector('[data-testid="User-Name"]')
+        if user_el:
+            user_text = (await user_el.inner_text()).lower()
+            if f"@{username.lower()}" not in user_text:
+                break  # 遇到其他人的回复，停止
+        else:
+            break
+
+        text_el = await article.query_selector('[data-testid="tweetText"]')
+        if not text_el:
+            continue
+        content = (await text_el.inner_text()).strip()
+        if content and content not in seen_texts:
+            seen_texts.add(content)
+            parts.append(content)
+
+        if len(parts) >= MAX_THREAD_PARTS:
+            break
+
+    if len(parts) <= 1:
+        return None  # 不是真正的连推
+
+    return "\n\n".join(parts)
+
+
 # ─── 页面抓取 ─────────────────────────────────────────────────────────────────
 
 
-async def extract_tweets_from_page(page: Page, username: str) -> list[dict]:
+async def extract_tweets_from_page(page: Page, username: str) -> list:
     """从当前页面的所有 article 元素提取推文数据"""
     results = []
     articles = await page.query_selector_all('article[data-testid="tweet"]')
@@ -214,6 +293,14 @@ async def extract_tweets_from_page(page: Page, username: str) -> list[dict]:
             if not tweet_id:
                 continue
 
+            # 检测是否是 Thread（搜索结果页会显示 "Show this thread" 链接）
+            thread_hint = await article.query_selector(
+                'a[data-testid="tweet-text-show-more-link"], '
+                'div[role="link"]:has-text("Show this thread"), '
+                'span:has-text("Show this thread")'
+            )
+            article_is_thread = thread_hint is not None or is_thread_start(content)
+
             # 点赞数
             likes = 0
             like_btn = await article.query_selector('[data-testid="like"]')
@@ -252,6 +339,7 @@ async def extract_tweets_from_page(page: Page, username: str) -> list[dict]:
                     "lang": detect_language(content),
                     "tweet_time": tweet_time,
                     "tweet_url": tweet_url,
+                    "is_thread": 1 if article_is_thread else 0,
                 }
             )
 
@@ -279,8 +367,7 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
         print("    ❌ 检测到登录页，session 可能已失效，请重新运行 login 模式")
         return 0
 
-    # 等待推文加载（X 动态渲染，需要等待足够时间）
-    # 最多重试 3 次（应对 "Something went wrong" 和限速）
+    # 等待推文加载，最多重试 3 次
     loaded = False
     for attempt in range(3):
         try:
@@ -288,17 +375,14 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
             loaded = True
             break
         except Exception:
-            # 检查是否有 "Something went wrong" 错误，自动点 Retry
             retry_btn = await page.query_selector('button[data-testid="error-detail-retry"]')
             if not retry_btn:
-                # 尝试文字匹配
                 retry_btn = await page.query_selector('div[role="button"]:has-text("Retry")')
             if retry_btn:
                 print(f"    🔄 检测到错误页，点击 Retry（第 {attempt+1} 次）...")
                 await retry_btn.click()
                 await page.wait_for_timeout(5_000)
             else:
-                # 没有 Retry 按钮，直接 reload
                 print(f"    🔄 重新加载页面（第 {attempt+1} 次）...")
                 await page.reload(wait_until="domcontentloaded", timeout=20_000)
                 await page.wait_for_timeout(5_000)
@@ -311,12 +395,12 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
             print("    ⚠️  加载失败，跳过")
         return 0
 
-    # 再等一小会儿让更多推文加载
     await page.wait_for_timeout(2_000)
 
-    seen_ids: set[str] = set()
+    seen_ids = set()
     saved = 0
     no_new_streak = 0
+    thread_candidates = []  # 待展开的 Thread 推文
 
     for scroll_i in range(MAX_SCROLLS):
         tweets = await extract_tweets_from_page(page, username)
@@ -335,8 +419,10 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
             if db_save_tweet(conn, t):
                 saved += 1
                 new_this_scroll += 1
+                # 记录 Thread 开头，待展开
+                if t.get("is_thread"):
+                    thread_candidates.append(t)
 
-        # 打印进度
         if scroll_i % 5 == 0 or new_this_scroll > 0:
             print(
                 f"    滚动 {scroll_i+1:2d} | 本次新增 {new_this_scroll:2d} | "
@@ -355,9 +441,26 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
         else:
             no_new_streak = 0
 
-        # 滚动到底部
         await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         await page.wait_for_timeout(int(SCROLL_DELAY * 1_000))
+
+    # ── Thread 展开 ────────────────────────────────────────────────────────────
+    if thread_candidates:
+        print(f"\n    🧵 检测到 {len(thread_candidates)} 个 Thread，逐个展开完整内容...")
+        for t in thread_candidates:
+            print(f"       → {t['tweet_url']}")
+            full_content = await fetch_thread_content(page, t["tweet_url"], username)
+            if full_content and len(full_content) > len(t["content"]):
+                db_update_thread_content(
+                    conn, t["tweet_id"], full_content, detect_language(full_content)
+                )
+                print(
+                    f"       ✅ 展开成功：{len(t['content'])} → {len(full_content)} 字符"
+                    f"（{len(full_content.split(chr(10)+chr(10)))} 段）"
+                )
+            else:
+                print(f"       ℹ️  非多段 Thread，跳过")
+            await page.wait_for_timeout(3_000)
 
     return saved
 
@@ -368,7 +471,7 @@ async def scrape_one_kol(page: Page, username: str, conn: sqlite3.Connection) ->
 def export_to_json(conn: sqlite3.Connection) -> int:
     """将未导出的推文导出为 tweets-scraped.json（与 import-tweets-to-db.ts 兼容格式）"""
     rows = conn.execute(
-        "SELECT username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url "
+        "SELECT username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url, is_thread "
         "FROM tweets WHERE exported = 0"
     ).fetchall()
 
@@ -378,7 +481,7 @@ def export_to_json(conn: sqlite3.Connection) -> int:
 
     data = []
     for row in rows:
-        username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url = row
+        username, tweet_id, content, likes, retweets, replies, lang, tweet_time, tweet_url, is_thread = row
         data.append(
             {
                 "tweet_id": tweet_id,
@@ -396,16 +499,17 @@ def export_to_json(conn: sqlite3.Connection) -> int:
                 "tweet_url": tweet_url or "",
                 "is_retweet": False,
                 "is_reply": False,
+                "is_thread": bool(is_thread),
             }
         )
 
     OUTPUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # 标记为已导出
     conn.execute("UPDATE tweets SET exported = 1 WHERE exported = 0")
     conn.commit()
 
-    print(f"✅ 已导出 {len(data)} 条推文到 {OUTPUT_JSON}")
+    threads_count = sum(1 for d in data if d["is_thread"])
+    print(f"✅ 已导出 {len(data)} 条推文（其中 Thread：{threads_count}）到 {OUTPUT_JSON}")
     return len(data)
 
 
@@ -430,8 +534,7 @@ async def cmd_login():
 
         print("⏳ 等待登录完成（最多 5 分钟）...")
 
-        # 自动轮询，检测到不在登录页就认为登录成功
-        for _ in range(150):  # 最多等 5 分钟（150 × 2s）
+        for _ in range(150):
             await asyncio.sleep(2)
             url = page.url
             if (
@@ -443,7 +546,7 @@ async def cmd_login():
         else:
             print("⚠️  等待超时（5 分钟），session 可能未完全登录")
 
-        await asyncio.sleep(2)  # 等页面稳定
+        await asyncio.sleep(2)
         await ctx.close()
 
     print("✅ Session 已保存！下次直接运行 scrape 模式即可。")
@@ -480,7 +583,6 @@ async def cmd_scrape(target_username: Optional[str] = None):
         )
         page = ctx.pages[0] if ctx.pages else await ctx.new_page()
 
-        # 检查登录状态
         try:
             await page.goto("https://x.com/home", wait_until="domcontentloaded", timeout=30_000)
             await page.wait_for_timeout(2_000)
@@ -516,13 +618,11 @@ async def cmd_scrape(target_username: Optional[str] = None):
                 print(f"  ❌ @{username} 出错：{e}")
                 consecutive_timeouts += 1
 
-            # 连续多次失败，触发冷却
             if consecutive_timeouts >= 3:
                 print(f"\n  ⏸️  连续 {consecutive_timeouts} 次无数据，冷却 {RATE_LIMIT_COOLDOWN}s 后继续...")
                 await page.wait_for_timeout(RATE_LIMIT_COOLDOWN * 1_000)
                 consecutive_timeouts = 0
 
-            # KOL 间隔
             if i < len(usernames) - 1:
                 await page.wait_for_timeout(int(KOL_DELAY * 1_000))
 
@@ -531,7 +631,6 @@ async def cmd_scrape(target_username: Optional[str] = None):
     print(f"\n🎉 抓取完成！共新增 {total_saved} 条推文\n")
     db_stats(conn)
 
-    # 自动导出
     print("\n📤 导出 JSON...")
     export_to_json(conn)
     conn.close()
@@ -542,7 +641,6 @@ def cmd_stats():
     conn = init_db()
     db_stats(conn)
 
-    # 按 KOL 统计
     rows = conn.execute(
         "SELECT username, COUNT(*) as cnt FROM tweets GROUP BY username ORDER BY cnt DESC"
     ).fetchall()
@@ -564,7 +662,7 @@ def cmd_export():
 # ─── 入口 ─────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="X 推文爬虫")
+    parser = argparse.ArgumentParser(description="X 推文爬虫（支持 Thread 连推展开）")
     parser.add_argument(
         "mode",
         choices=["login", "scrape", "stats", "export"],

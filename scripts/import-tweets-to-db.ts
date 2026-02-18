@@ -28,6 +28,7 @@ interface Tweet {
   tweet_url: string;
   is_retweet: boolean;
   is_reply: boolean;
+  is_thread?: boolean;
 }
 
 const BATCH_SIZE = 50;
@@ -74,9 +75,11 @@ async function main() {
           `INSERT INTO tweets (
             tweet_id, kol_username, content, content_zh, language,
             translated_at, media_urls, likes, retweets, replies,
-            views, tweet_time, tweet_url, is_retweet, is_reply
-          ) VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8, $9, $10, $11, $12, $13, $14, $15)
-          ON CONFLICT (tweet_id) DO NOTHING`,
+            views, tweet_time, tweet_url, is_retweet, is_reply, is_thread
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+          ON CONFLICT (tweet_id) DO UPDATE SET
+            is_thread = EXCLUDED.is_thread,
+            content = EXCLUDED.content`,
           [
             t.tweet_id,
             t.kol_username,
@@ -93,6 +96,7 @@ async function main() {
             t.tweet_url || "",
             t.is_retweet || false,
             t.is_reply || false,
+            t.is_thread || false,
           ]
         );
 
