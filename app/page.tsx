@@ -33,41 +33,44 @@ export default async function HomePage() {
     <main>
       {/* Hero Section */}
       <section className="border-b border-border bg-card">
-        <div className="container mx-auto px-6 lg:px-8 py-16 lg:py-20">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-              推特大佬电子阅览室
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              精选推特各领域顶级 KOL 的完整推文，中英双语阅读，无需翻墙即可追踪行业最前沿的观点与洞察。
-            </p>
+        <div className="container mx-auto px-6 lg:px-8 py-6 lg:py-8">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            {/* Title + Description */}
+            <div className="min-w-0">
+              <h1 className="text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
+                推特大佬电子阅览室
+              </h1>
+              <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed max-w-xl">
+                精选推特各领域顶级 KOL 的完整推文，中英双语阅读，无需翻墙即可追踪行业最前沿的观点与洞察。
+              </p>
+            </div>
             {/* Stats */}
-            <div className="mt-8 flex items-center gap-8">
+            <div className="flex items-center gap-6 shrink-0">
               <div className="flex items-center gap-2 text-sm">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Users className="h-4 w-4 text-primary" />
+                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Users className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">{kolCount}+</p>
-                  <p className="text-xs text-muted-foreground">位 KOL</p>
+                  <p className="font-semibold text-foreground leading-none">{kolCount}+</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">位 KOL</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <FileText className="h-4 w-4 text-primary" />
+                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FileText className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">{tweetCount.toLocaleString()}+</p>
-                  <p className="text-xs text-muted-foreground">条推文</p>
+                  <p className="font-semibold text-foreground leading-none">{tweetCount.toLocaleString()}+</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">条推文</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Layers className="h-4 w-4 text-primary" />
+                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Layers className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground">{categories.length}</p>
-                  <p className="text-xs text-muted-foreground">大类目</p>
+                  <p className="font-semibold text-foreground leading-none">{categories.length}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">大类目</p>
                 </div>
               </div>
             </div>
