@@ -3,6 +3,8 @@ import Image from "next/image"
 import { getAllCategories, getKOLsByCategory, getTotalKOLCount, getTotalTweetCount } from "@/lib/queries"
 import { Users, FileText, Layers, ChevronRight } from "lucide-react"
 
+export const revalidate = 3600 // 每小时重新构建一次
+
 function formatFollowers(count: number): string {
   if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`
   if (count >= 1000) return `${(count / 1000).toFixed(1)}K`

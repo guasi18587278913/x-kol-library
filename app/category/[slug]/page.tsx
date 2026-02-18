@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { getAllCategories, getCategoryBySlug, getKOLsByCategory, getKOLCount } from "@/lib/queries"
 import { KOLList } from "./KOLList"
+
+export const revalidate = 3600
 import { ChevronRight } from "lucide-react"
 
 const PAGE_SIZE = 12
